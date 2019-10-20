@@ -1,7 +1,7 @@
 package com.example.giffy.repository
 
-import com.example.giffy.network.GiffySearchApi
-import com.example.giffy.network.toGiffyImageResults
+import com.example.giffy.network.api.GiffySearchApi
+import com.example.giffy.network.api.GiffyTrendingApi
 
 
 /**
@@ -9,28 +9,39 @@ import com.example.giffy.network.toGiffyImageResults
  * could be a database as well) it and communicates the proccessed result after caching to the presentation layer using
  * result listeners(simple callbacks).
  */
-interface BlockChainDataRepository {
+interface GiffyDataRepository {
     suspend fun getData(search:String): GiffyResult
 
+    suspend fun getTrendingData(): GiffyResult
+
     companion object {
-        fun get(): BlockChainDataRepository {
-            return BlockChainDataRepositoryImpl
+        fun get(): GiffyDataRepository {
+            return GiffyDataRepositoryImpl
         }
     }
 }
 
-internal object BlockChainDataRepositoryImpl : BlockChainDataRepository {
+internal object GiffyDataRepositoryImpl : GiffyDataRepository {
 
-    internal var giffySearchApi: GiffySearchApi = GiffySearchApi.get()
-
-    //todo
-    override suspend fun getData(search: String): GiffyResult {
-        val res = search.let { giffySearchApi.getData(it).toGiffyImageResults() }
+    internal var giffyTrendingApi: GiffyTrendingApi = GiffyTrendingApi.get()
+    override suspend fun getTrendingData(): GiffyResult {
+        val res = giffyTrendingApi.getData().toGiffyImageResults()
         //todo clean
         return if (!res.urlList.isEmpty()) return OnSuccessGiffyResult(
             res
         ) else OnFailurGiffyResult(
             IllegalAccessException()
         )
+
+    }
+
+    internal var giffySearchApi: GiffySearchApi = GiffySearchApi.get()
+
+    override suspend fun getData(search: String): GiffyResult  {
+        val res = giffySearchApi.getData(search).result
+        res?.toGiffyImageResults()?.let {
+            if(!it.urlList.isNullOrEmpty()) return OnSuccessGiffyResult(it)
+        }
+        return OnFailurGiffyResult(Throwable("No Giffy Urls Found"))
     }
 }

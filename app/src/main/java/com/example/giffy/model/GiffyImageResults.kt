@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GiffyImageResults(
-    val urlList: List<Image>
+    val urlList: List<Image> = emptyList()
 ) : Parcelable
 
 @Parcelize

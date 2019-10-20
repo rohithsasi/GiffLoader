@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.giffy.coroutine.MainCoroutineScope
-import com.example.giffy.repository.BlockChainDataRepository
+import com.example.giffy.repository.GiffyDataRepository
 import com.example.giffy.repository.GiffyResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class BlockChainViewModel : ViewModel() {
     /**
      * The only reference this class hols is that of the repository.
      */
-    private val repository by lazy { BlockChainDataRepository.get() }
+    private val repository by lazy { GiffyDataRepository.get() }
 
     private val _uiData = MutableLiveData<GiffyResult>()
     val uiData: LiveData<GiffyResult> = _uiData

@@ -1,14 +1,15 @@
-package com.example.giffy.network
+package com.example.giffy.network.api
 
 import android.util.Log
+import com.example.giffy.network.GiffyRestClient
 import com.example.giffy.network.model.GiffySearchResult
-import com.example.giffy.network.model.GiffyTrendingResult
+import com.example.giffy.network.webservice.GiffyServiceApi
 import kotlinx.coroutines.Deferred
 
 
-interface GiffySearchApi {
+internal interface GiffySearchApi {
 
-    suspend fun getData(search: String):GiffySearchResult
+    suspend fun getData(search: String):GiffySearchApiImpl.NetworkModel<GiffySearchResult>
 
     companion object {
         fun get(): GiffySearchApi {
@@ -28,17 +29,15 @@ private val GIFFY_SERVICE_API: GiffyServiceApi by lazy {
  * Makes network requests to the block chain apis and returns a result as an observable. The result is communicated
  * back to the repository layer (up the chain) using a network result listener (simple interface callbacks)
  */
-private object GiffySearchApiImpl : GiffySearchApi {
+internal object GiffySearchApiImpl : GiffySearchApi {
 
-    override suspend fun getData(search: String): GiffySearchResult {
-
-        val res=  GIFFY_SERVICE_API.getGiffySearchResults("229ac3e932794695b695e71a9076f4e5","1","0","G","en","" +
+    override suspend fun getData(search: String): NetworkModel<GiffySearchResult> {
+        //todo ui does not work with one
+        val res=  GIFFY_SERVICE_API.getGiffySearchResults("229ac3e932794695b695e71a9076f4e5","25","0","G","en","" +
                 search).execute {
-
-            // networkListener.onSuccess(GiffySearchResult("","","","","", emptyList()))
-
+            return NetworkModel(null, it)
         }
-        return res!!
+        return NetworkModel(res)
     }
 
 
@@ -51,6 +50,8 @@ private object GiffySearchApiImpl : GiffySearchApi {
             null
         }
     }
+
+    data class NetworkModel<T>(val result: T?, val error: Throwable? = null)
 
 }
 

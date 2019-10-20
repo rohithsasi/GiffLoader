@@ -1,5 +1,6 @@
 package com.example.giffy.network
 
+import com.example.giffy.network.webservice.GiffyServiceApi
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient

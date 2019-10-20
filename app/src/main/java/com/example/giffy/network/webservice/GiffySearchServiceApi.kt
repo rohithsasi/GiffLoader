@@ -1,4 +1,4 @@
-package com.example.giffy.network
+package com.example.giffy.network.webservice
 
 import com.example.giffy.network.model.GiffySearchResult
 import com.example.giffy.network.model.GiffyTrendingResult
@@ -10,9 +10,10 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 const val CHARTS = "charts/{chartType}"
-const val STATS = "v1/gifs/search"
+const val SEARCH = "v1/gifs/search"
+const val TRENDING = "v1/gifs/trending"
 
-interface GiffyServiceApi {
+internal interface GiffyServiceApi {
 
     @GET(CHARTS)
     @Headers(value = ["Accept:application/json; charset=utf-8", "Accept-Charset:utf-8"])
@@ -27,7 +28,7 @@ interface GiffyServiceApi {
     ): Response<GiffySearchResult>
 
 
-    @GET(STATS)
+    @GET(SEARCH)
     @Headers(value = ["Accept:application/json; charset=utf-8", "Accept-Charset:utf-8"])
     fun getBlockChainStats(
         @Query("api_key") apiKey: String,
@@ -39,7 +40,7 @@ interface GiffyServiceApi {
 
     ) : Deferred<GiffyTrendingResult>
 
-    @GET(STATS)
+    @GET(SEARCH)
     @Headers(value = ["Accept:application/json; charset=utf-8", "Accept-Charset:utf-8"])
     fun getGiffySearchResults(
         @Query("api_key") apiKey: String,
@@ -50,5 +51,19 @@ interface GiffyServiceApi {
         @Query("q") rollingqAverage: String
 
     ) : Deferred<GiffySearchResult>
+
+
+
+
+    @GET(TRENDING)
+    @Headers(value = ["Accept:application/json; charset=utf-8", "Accept-Charset:utf-8"])
+    fun getGiffyTrendingResults(
+        @Query("api_key") apiKey: String,
+        @Query("limit") limit: String,
+        @Query("offset") offset: String,
+        @Query("rating") rating: String,
+        @Query("lang") lang: String
+    ) : Deferred<GiffySearchResult>
+
 
 }

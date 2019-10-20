@@ -2,7 +2,7 @@ package com.example.giffy.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GiffyTrendingResult(
+internal data class GiffyTrendingResult(
     @SerializedName("timestamp")val timestamp : String,
     @SerializedName("market_price_usd")val marketPrice : String,
     @SerializedName("hash_rate")val hashRate : String,

@@ -1,4 +1,4 @@
-package com.example.giffy
+package com.example.giffy.utils
 
 import android.graphics.*
 import com.squareup.picasso.Transformation
