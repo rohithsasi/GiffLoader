@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.giffy.R
 import com.example.giffy.coroutine.MainCoroutineScope
 import com.example.giffy.utils.NetworkConnectionUtil
+import com.example.giffy.utils.getString
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -18,6 +19,11 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         launchHome()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        lifecycle.addObserver(uiScope)
     }
 
     private fun launchHome() {
@@ -38,9 +44,9 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun throwErrorDialog() {
         MaterialAlertDialogBuilder(this)
-            .setTitle("Network Error")
-            .setMessage("Please check your WiFi or cellular connection and try again.")
-            .setPositiveButton("Retry") { dialog, which ->
+            .setTitle(R.string.network_dialog_title.getString())
+            .setMessage(R.string.network_dialog_text.getString())
+            .setPositiveButton(R.string.network_dialog_retry.getString()) { dialog, which ->
                 launchHome()
             }
             .setNegativeButton(android.R.string.cancel) { dialog, which ->

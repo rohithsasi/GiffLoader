@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.giffy.R
-import com.example.myapplication.ui.notifications.NotificationsViewModel
 
 class NotificationsFragment : Fragment() {
 

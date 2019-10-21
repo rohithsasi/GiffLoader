@@ -1,4 +1,4 @@
-package com.example.giffy.ui
+package com.example.giffy.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -25,7 +25,13 @@ class GiffySearchAdapter(val context: Context) : RecyclerView.Adapter<GiffySearc
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_my_shoes, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_my_shoes,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
