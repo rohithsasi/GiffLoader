@@ -33,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
@@ -72,7 +72,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val MAIN_CONTENT_TAG = "MAIN_CONTENT_TAG"
 
         fun navigateTo(activity: Context) {
             activity.startActivity(Intent(activity, HomeActivity::class.java))

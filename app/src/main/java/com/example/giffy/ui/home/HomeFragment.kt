@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.giffy.R
 import com.example.giffy.presentation.BlockChainViewModel
 import com.example.giffy.repository.GiffyResult
-import com.example.giffy.repository.OnFailurGiffyResult
+import com.example.giffy.repository.OnFailureGiffyResult
 import com.example.giffy.repository.OnSuccessGiffyResult
 import com.example.giffy.utils.NetworkConnectionUtil
 import com.example.giffy.utils.getString
@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
                     data.result?.urlList?.let { myAdapter.update(it) }
                 }
 
-                is OnFailurGiffyResult -> {
+                is OnFailureGiffyResult -> {
                     //error state
                     recycle_view_gif.visibility = View.GONE
                     error_text.visibility = View.VISIBLE
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        //Observe the LiveData, passing in this fragment as the LifecycleOwner and the observer.
         vm.searchResult.observe(this, gifsObserver)
     }
 
@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_scrolling, menu)
-        val menuItem = menu!!.findItem(R.id.app_bar_search)
+        val menuItem = menu.findItem(R.id.app_bar_search)
         val searchView = menuItem.actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

@@ -12,10 +12,6 @@ internal data class Data(
         @SerializedName("images") val images: Images
 )
 
-//data class Data(
-//        @SerializedName("images") val images: Images
-//)
-
 internal data class Images(
         @SerializedName("preview_gif") val original: PreviewGif
 )

@@ -12,11 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.giffy.R
+import com.example.giffy.presentation.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-
 class DashboardFragment : Fragment() {
-
     private lateinit var dashboardViewModel: DashboardViewModel
 
     override fun onCreateView(
@@ -64,7 +63,7 @@ class DashboardFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         activity!!.invalidateOptionsMenu()
-        menu.findItem(R.id.app_bar_search).setVisible(false)
+        menu.findItem(R.id.app_bar_search).isVisible = false
     }
 
 }

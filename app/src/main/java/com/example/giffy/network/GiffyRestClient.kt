@@ -7,7 +7,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+/**
+ * Rest client, interceptors and adapters
+ */
 internal interface GiffyRestClient {
     val giffyServiceApi: GiffyServiceApi
 

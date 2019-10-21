@@ -12,8 +12,8 @@ import com.example.giffy.model.Image
 import kotlinx.android.synthetic.main.item_my_shoes.view.*
 import com.bumptech.glide.request.RequestOptions
 
-class GiffySearchAdapter(val context: Context) : RecyclerView.Adapter<GiffySearchAdapter.ViewHolder>() {
-    var gifs : List<Image> = mutableListOf()
+class GiffySearchAdapter(private val context: Context) : RecyclerView.Adapter<GiffySearchAdapter.ViewHolder>() {
+    private var gifs : List<Image> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -45,7 +45,7 @@ class GiffySearchAdapter(val context: Context) : RecyclerView.Adapter<GiffySearc
             .asGif()
             .load(url)
             .apply(options.centerCrop())
-            .into(holder.imageView);
+            .into(holder.imageView)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

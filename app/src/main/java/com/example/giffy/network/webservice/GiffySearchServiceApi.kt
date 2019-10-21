@@ -12,7 +12,7 @@ const val TRENDING = "v1/gifs/trending"
 internal interface GiffyServiceApi {
     @GET(SEARCH)
     @Headers(value = ["Accept:application/json; charset=utf-8", "Accept-Charset:utf-8"])
-    fun getGifsSearchResults(
+    fun getGifsSearchResultsAsync(
         @Query("api_key") apiKey: String,
         @Query("limit") limit: String,
         @Query("offset") offset: String,

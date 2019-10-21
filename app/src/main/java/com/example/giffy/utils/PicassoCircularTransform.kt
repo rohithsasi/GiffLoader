@@ -2,6 +2,7 @@ package com.example.giffy.utils
 
 import android.graphics.*
 import com.squareup.picasso.Transformation
+import kotlin.math.min
 
 class PicassoCircularTransform : Transformation {
 
@@ -10,7 +11,7 @@ class PicassoCircularTransform : Transformation {
     }
 
     override fun transform(source: Bitmap): Bitmap {
-        val size = source.width.let { Math.min(it, source.height) }
+        val size = min(source.width, source.height)
 
         val x = (source.width - size) / 2
         val y = (source.height - size) / 2

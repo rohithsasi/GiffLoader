@@ -9,11 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+/**
+ * View Model that emits updates to the respective ui observing the live data
+ */
 class BlockChainViewModel(application :Application) : AndroidViewModel(application) {
-    /**
-     * The only reference this class hols is that of the repository.
-     */
     private val repository by lazy { GiffyDataRepository.get() }
     private val _searchResult = MutableLiveData<GiffyResult>()
 
@@ -27,5 +26,4 @@ class BlockChainViewModel(application :Application) : AndroidViewModel(applicati
             }
             _searchResult.value = result
         }
-
 }
